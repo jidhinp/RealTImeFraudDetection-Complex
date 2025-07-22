@@ -8,39 +8,61 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
     <style>
         body {
-            background: #f4f6fb;
+            background: linear-gradient(120deg, #e0e7ff 0%, #f4f6fb 100%);
             font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
         }
-        .container {
-            max-width: 420px;
-            margin: 40px auto;
+        .header {
+            width: 100%;
+            background: linear-gradient(90deg, #3182ce 0%, #63b3ed 100%);
+            color: #fff;
+            padding: 32px 0 24px 0;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 12px rgba(49,130,206,0.08);
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            padding: 0 16px;
+        }
+        .card {
             background: #fff;
             border-radius: 16px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
             padding: 32px 28px 24px 28px;
+            min-width: 340px;
+            max-width: 420px;
+            flex: 1 1 340px;
         }
-        h1 {
+        .form-title {
             text-align: center;
             color: #2d3748;
             margin-bottom: 24px;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         form {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
-        input {
+        input, select {
             padding: 12px;
             border: 1px solid #cbd5e1;
             border-radius: 8px;
             font-size: 1rem;
             transition: border 0.2s;
         }
-        input:focus {
+        input:focus, select:focus {
             border: 1.5px solid #3182ce;
             outline: none;
         }
@@ -64,12 +86,14 @@
             font-size: 1.1rem;
         }
         .alerts-section {
-            margin-top: 36px;
+            margin-top: 0;
         }
-        h2 {
+        .alerts-title {
             color: #2d3748;
             font-size: 1.2rem;
             margin-bottom: 10px;
+            font-weight: 700;
+            text-align: left;
         }
         #alerts {
             min-height: 32px;
@@ -89,25 +113,91 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @media (max-width: 500px) {
-            .container {
-                padding: 18px 6px 16px 6px;
+        @media (max-width: 900px) {
+            .main {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 24px;
+            }
+            .card {
+                max-width: 100%;
+                min-width: unset;
+            }
+        }
+        @media (max-width: 600px) {
+            .main {
+                margin: 20px auto 0 auto;
+                padding: 0 4px;
+            }
+            .header {
+                font-size: 1.3rem;
+                padding: 18px 0 12px 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Fraud Detection Demo</h1>
-        <form id="txnForm">
-            <input id="txnId" placeholder="Transaction ID" required />
-            <input id="amount" type="number" placeholder="Amount" required min="0" step="0.01" />
-            <input id="account" placeholder="Account Number" required />
-            <button type="submit">Submit Transaction</button>
-        </form>
-        <div id="result"></div>
-        <div class="alerts-section">
-            <h2>Fraud Alerts</h2>
+    <div class="header">FinTech Real-Time Fraud Detection</div>
+    <div class="main">
+        <div class="card">
+            <div class="form-title">Submit Transaction</div>
+            <form id="txnForm">
+                <input id="txnId" placeholder="Transaction ID" required />
+                <input id="amount" type="number" placeholder="Amount" required min="0" step="0.01" />
+                <input id="account" placeholder="Account Number" required />
+                <select id="transactionType" required>
+                    <option value="">Transaction Type</option>
+                    <option value="Purchase">Purchase</option>
+                    <option value="Withdrawal">Withdrawal</option>
+                    <option value="Transfer">Transfer</option>
+                    <option value="Payment">Payment</option>
+                </select>
+                <input id="accountBalance" type="number" placeholder="Account Balance" required min="0" step="0.01" />
+                <input id="transactionTime" type="datetime-local" placeholder="Transaction Time" required />
+                <select id="merchantCategory" required>
+                    <option value="">Merchant Category</option>
+                    <option value="Groceries">Groceries</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Jewelry">Jewelry</option>
+                    <option value="Luxury">Luxury</option>
+                    <option value="ATM">ATM</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="RealEstate">Real Estate</option>
+                    <option value="Restaurants">Restaurants</option>
+                    <option value="Clothing">Clothing</option>
+                </select>
+                <select id="deviceType" required>
+                    <option value="">Device Type</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Web">Web</option>
+                    <option value="ATM">ATM</option>
+                </select>
+                <select id="location" required>
+                    <option value="">Location</option>
+                    <option value="NewYork">New York</option>
+                    <option value="LosAngeles">Los Angeles</option>
+                    <option value="Chicago">Chicago</option>
+                    <option value="Boston">Boston</option>
+                    <option value="London">London</option>
+                    <option value="Paris">Paris</option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="Tokyo">Tokyo</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="SanFrancisco">San Francisco</option>
+                    <option value="Zurich">Zurich</option>
+                </select>
+                <input id="accountAgeDays" type="number" placeholder="Account Age (days)" required min="0" step="1" />
+                <input id="numTransactions24h" type="number" placeholder="# Transactions in 24h" required min="0" step="1" />
+                <input id="avgTransactionAmount7d" type="number" placeholder="Avg. Transaction Amount (7d)" required min="0" step="0.01" />
+                <input id="previousFraudCount" type="number" placeholder="Previous Fraud Count" required min="0" step="1" />
+                <button type="submit">Submit Transaction</button>
+            </form>
+            <div id="result"></div>
+        </div>
+        <div class="card alerts-section">
+            <div class="alerts-title">Fraud Alerts & Messages</div>
             <div id="alerts"></div>
         </div>
     </div>
@@ -131,16 +221,51 @@
             const txnId = document.getElementById("txnId").value;
             const amount = parseFloat(document.getElementById("amount").value);
             const account = document.getElementById("account").value;
+            const transactionType = document.getElementById("transactionType").value;
+            const accountBalance = parseFloat(document.getElementById("accountBalance").value);
+            const transactionTime = document.getElementById("transactionTime").value;
+            const merchantCategory = document.getElementById("merchantCategory").value;
+            const deviceType = document.getElementById("deviceType").value;
+            const location = document.getElementById("location").value;
+            const accountAgeDays = parseFloat(document.getElementById("accountAgeDays").value);
+            const numTransactions24h = parseFloat(document.getElementById("numTransactions24h").value);
+            const avgTransactionAmount7d = parseFloat(document.getElementById("avgTransactionAmount7d").value);
+            const previousFraudCount = parseFloat(document.getElementById("previousFraudCount").value);
             const resultDiv = document.getElementById("result");
             resultDiv.innerHTML = "<span style='color:#3182ce;'>Processing...</span>";
             try {
                 const res = await fetch("/api/transaction", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transactionId: txnId, amount, accountNumber: account })
+                    body: JSON.stringify({
+                        transactionId: txnId,
+                        amount,
+                        accountNumber: account,
+                        transactionType,
+                        accountBalance,
+                        transactionTime,
+                        merchantCategory,
+                        deviceType,
+                        location,
+                        accountAgeDays,
+                        numTransactions24h,
+                        avgTransactionAmount7d,
+                        previousFraudCount
+                    })
                 });
                 const data = await res.json();
                 resultDiv.innerHTML = res.ok ? `<span style='color:green;'>${data.message}</span>` : `<span style='color:#c53030;'>${data.message}: ${data.reason}</span>`;
+                // Also show the message in the alerts panel
+                if (res.ok) {
+                    const alerts = document.getElementById("alerts");
+                    const msgDiv = document.createElement("div");
+                    msgDiv.className = "alert";
+                    msgDiv.style.background = '#f0fff4';
+                    msgDiv.style.color = '#276749';
+                    msgDiv.style.borderLeft = '4px solid #38a169';
+                    msgDiv.innerHTML = `<strong>Success:</strong> ${data.message}`;
+                    alerts.prepend(msgDiv);
+                }
             } catch (err) {
                 resultDiv.innerHTML = `<span style='color:#c53030;'>Error submitting transaction.</span>`;
             }

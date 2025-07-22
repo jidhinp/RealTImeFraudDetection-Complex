@@ -38,7 +38,17 @@ namespace FinTech.Controllers
             var input = new TransactionData
             {
                 Amount = (float)transaction.Amount,
-                AccountNumber = transaction.AccountNumber
+                AccountNumber = transaction.AccountNumber,
+                TransactionType = transaction.TransactionType,
+                AccountBalance = (float)transaction.AccountBalance,
+                TransactionTime = transaction.TransactionTime,
+                MerchantCategory = transaction.MerchantCategory,
+                DeviceType = transaction.DeviceType,
+                Location = transaction.Location,
+                AccountAgeDays = (float)transaction.AccountAgeDays,
+                NumTransactions24h = (float)transaction.NumTransactions24h,
+                AvgTransactionAmount7d = (float)transaction.AvgTransactionAmount7d,
+                PreviousFraudCount = (float)transaction.PreviousFraudCount
             };
             var prediction = _predEngine.Predict(input);
 
