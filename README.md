@@ -1,4 +1,4 @@
-# FinTech Real-Time Fraud Detection
+# Real-Time Fraud Transaction Detection
 
 ## Overview
 This project is a modern FinTech web application built with ASP.NET Core (.NET 8) that demonstrates real-time fraud detection using machine learning (ML.NET), SignalR for live alerts, and SQL Server for data storage. It provides both a REST API and a simple web UI for submitting transactions and receiving fraud alerts.
