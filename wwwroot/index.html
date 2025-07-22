@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time Fraud Detection Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+</head>
+<body>
+    <h1>Fraud Detection Demo</h1>
+    <form id="txnForm">
+        <input id="txnId" placeholder="Transaction ID" required />
+        <input id="amount" type="number" placeholder="Amount" required />
+        <input id="account" placeholder="Account Number" required />
+        <button type="submit">Submit Transaction</button>
+    </form>
+    <div id="result"></div>
+    <h2>Fraud Alerts</h2>
+    <div id="alerts"></div>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/fraudAlertHub")
+            .build();
+
+        connection.on("ReceiveFraudAlert", (transactionId, reason) => {
+            const alerts = document.getElementById("alerts");
+            alerts.innerHTML += `<div style='color:red;'>Fraud Alert! Txn ${transactionId}: ${reason}</div>`;
+        });
+
+        connection.start();
+
+        document.getElementById("txnForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const txnId = document.getElementById("txnId").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            const account = document.getElementById("account").value;
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "Processing...";
+            const res = await fetch("/api/transaction", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ transactionId: txnId, amount, accountNumber: account })
+            });
+            const data = await res.json();
+            resultDiv.innerHTML = res.ok ? `<span style='color:green;'>${data.message}</span>` : `<span style='color:red;'>${data.message}: ${data.reason}</span>`;
+        };
+    </script>
+</body>
+</html> 
