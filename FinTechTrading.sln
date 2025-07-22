@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinTech", "FinTech.csproj", "{6CFFCFEA-7E39-42D6-8951-B3B4EEA96E50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FraudModelTrainer", "..\FraudModelTrainer\FraudModelTrainer.csproj", "{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,18 +27,6 @@ Global
 		{6CFFCFEA-7E39-42D6-8951-B3B4EEA96E50}.Release|x64.Build.0 = Release|Any CPU
 		{6CFFCFEA-7E39-42D6-8951-B3B4EEA96E50}.Release|x86.ActiveCfg = Release|Any CPU
 		{6CFFCFEA-7E39-42D6-8951-B3B4EEA96E50}.Release|x86.Build.0 = Release|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Debug|x64.Build.0 = Debug|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Debug|x86.Build.0 = Debug|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Release|x64.ActiveCfg = Release|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Release|x64.Build.0 = Release|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Release|x86.ActiveCfg = Release|Any CPU
-		{2CE494EB-95F2-41FA-8425-FBAFDE617CCF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
